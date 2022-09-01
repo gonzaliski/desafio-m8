@@ -1,0 +1,33 @@
+{
+  "name": "webpack",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^18.7.13",
+    "@types/react": "^18.0.17",
+    "cross-env": "^7.0.3",
+    "css-loader": "^6.7.1",
+    "file-loader": "^6.2.0",
+    "live-server": "^1.2.2",
+    "react": "^18.2.0",
+    "react-burger-menu": "^3.0.8",
+    "react-dom": "^18.2.0",
+    "react-elastic-carousel": "^0.11.5",
+    "react-router-dom": "^6.3.0",
+    "recoil": "^0.7.5",
+    "style-loader": "^3.3.1",
+    "styled-components": "^5.3.5",
+    "ts-loader": "^9.3.1",
+    "typescript": "^4.7.4",
+    "webpack": "^5.74.0"
+  },
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development webpack",
+    "build": "cross-env NODE_ENV=production webpack",
+    "start": "live-server"
+  },
+  "devDependencies": {
+    "webpack-cli": "^4.10.0"
+  }
+}
