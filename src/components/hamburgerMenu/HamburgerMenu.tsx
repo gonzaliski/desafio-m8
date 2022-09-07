@@ -1,22 +1,72 @@
 import React,{useState} from "react"
-import css from "./hamburgerMenu.css"
-export function HamburgerMenu(){
+import styled from "styled-components"
+export function HamburgerMenu(props){
     const [active, setActiveValue] = useState(false)
-    const [hamburgerClass, sethamburgerClass] = useState(css["hamburger-menu"])
+    // const [hamburgerClass, sethamburgerClass] = useState(css["hamburger-menu"])
     const toggleActive = ()=>{
-        if(!active){
-            sethamburgerClass(css["hamburger-menu-active"])
-        }else{
-            sethamburgerClass(css["hamburger-menu"])
-        }
+        // console.log("is active", active);
+        
+        // if(active){
+        //     sethamburgerClass(css["hamburger-menu active"])
+        // }else{
+        //     sethamburgerClass(css["hamburger-menu"])
+        // }
         
         setActiveValue(!active)
     }
     return(
-        <div className={hamburgerClass} onClick={toggleActive} >
-            <span className={css["bar"]}></span>
-            <span className={css["bar"]}></span>
-            <span className={css["bar"]}></span>
-      </div>
+        <Hamburger>
+
+        <div onClick={props.handleClick} className={`icon nav-icon-5 ${props.clicked ? 'open' : ''}`}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </Hamburger>
     )
 }
+
+const Hamburger = styled.div`
+  .nav-icon-5{
+  width: 35px;
+  height: 30px;
+  margin: 10px 10px;
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+}
+.nav-icon-5 span{
+  background-color:black;
+  position: absolute;
+  border-radius: 2px;
+  transition: .3s cubic-bezier(.8, .5, .2, 1.4);
+  width:100%;
+  height: 4px;
+  transition-duration: 500ms
+}
+.nav-icon-5 span:nth-child(1){
+  top:0px;
+  left: 0px;
+}
+.nav-icon-5 span:nth-child(2){
+  top:13px;
+  left: 0px;
+  opacity:1;
+}
+.nav-icon-5 span:nth-child(3){
+  bottom:0px;
+  left: 0px;
+}
+.nav-icon-5.open span:nth-child(1){
+  transform: rotate(45deg);
+  top: 13px;
+}
+.nav-icon-5.open span:nth-child(2){
+  opacity:0;
+}
+.nav-icon-5.open span:nth-child(3){
+  transform: rotate(-45deg);
+  top: 13px;
+}
+  
+`

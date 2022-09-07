@@ -8,6 +8,8 @@
     --secondary-color: #FF9DF5;
     --tertiary-color:#97EA9F;
     --found-color:#32a852;
+    --header-height:75px;
+    --remaining-page-height: calc(100vh - var(--header-height))
 
 }
 body{
