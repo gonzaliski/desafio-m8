@@ -16,3 +16,13 @@ export const tokenState = atom({
     default: "", // default value (aka initial value)
     effects_UNSTABLE: [persistAtom],
   });
+
+export const nearPetsState = atom({
+  key:'nearPetsState',
+  default:[],
+})
+
+export const reportedPetsState = atom({
+  key:'reportedPetsState',
+  default:[],
+})

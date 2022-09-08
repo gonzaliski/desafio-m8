@@ -109,18 +109,17 @@ export async function processEmail(email:string){
    
  }
 
- export async function getMyPets(){
-   const cs = this.getState()
-   const myPets = await fetch(API_BASE_URL + "/me/pets" + "?userId=" + cs.userId,
+ export async function getMyPets(userId:number,token:string){
+   const myPets = await fetch(API_BASE_URL + "/me/pets" + "?userId=" + userId,
    {
      method:"get",
      headers:{
      "Content-Type": "application/json",
-     Authorization: `bearer ${cs.token}`,
+     Authorization: `bearer ${token}`,
    }})
    let petsToJson = await myPets.json()
    
-   let petsToList = this.processPets(petsToJson)
+   let petsToList = processPets(petsToJson)
    return petsToList
  }
  export async function reportFound(petId){

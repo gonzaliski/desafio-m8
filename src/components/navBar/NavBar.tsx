@@ -3,10 +3,12 @@ import React, { useState } from "react";
 import PawLogo from "../../assets/paw.png";
 import styled from "styled-components";
 import {FaUserAlt} from "react-icons/fa"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useToken,useUserData } from "../../hooks";
+import { ThinText } from "../../ui/texts";
 export function NavBar() {
   const [token, setToken] = useToken()
+  let navigate = useNavigate()
   const [userData, setUserData] = useUserData()
   const [clicked, setClicked] = useState(false);
   const [userInfoClicked, setUserInfoClicked] = useState(false)
@@ -17,8 +19,10 @@ export function NavBar() {
     setUserInfoClicked(!userInfoClicked)
   }
   const logOut = ()=>{
+    handleClick()
     setUserData({})
     setToken("")
+    navigate("/",{replace:true})
   }
 
   return (
@@ -41,7 +45,7 @@ export function NavBar() {
                 <FaUserAlt></FaUserAlt>
               </a>
             <div  className={`user-info__container menu ${userInfoClicked ? 'active' : ''}`}>
-            <p className={"user-name__display"}>{token ? userData.email : ""}</p>
+            <ThinText className={"user-name__display"}>{token ? userData.email : ""}</ThinText>
             <a onClick={logOut}className={`log-out ${!token ? 'disabled' : ''}`}>
             Cerrar sesión
             </a>
@@ -132,9 +136,7 @@ const NavContainer = styled.nav`
       z-index: -1;
       align-items: center;
     }
-    burger-menu {
-      display: none;
-    }
+ 
   }
   .nav-menu.active {
     position: absolute;

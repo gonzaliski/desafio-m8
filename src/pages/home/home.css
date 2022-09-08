@@ -1,15 +1,15 @@
-.container{
+.container,.pets-container{
     height: var(--remaining-page-height);
     display: flex;
     justify-content: center;
 }
-/* TODO: hacer el container scrolleable */
 .pets-container{
-    display: flex;
     align-items: center;
+    justify-content: unset;
     gap:10px;
     flex-direction: column;
     overflow: auto;
+    padding: 10px 0;
 }
 
 .content{

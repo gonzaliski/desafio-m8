@@ -15,11 +15,11 @@ export function Password() {
         let token = await signIn(userData.email, e.target.password.value)
         if(token){
           setToken(token)
+          navigate("/",{replace:true})
         }else{
           alert("la contraseña no coincide")
         }
-        console.log("token", token);
-        console.log(e.target.password.value);
+       
     }
     useEffect(()=>{
       console.log("userData updated",token);
