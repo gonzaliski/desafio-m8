@@ -5,10 +5,10 @@ export function MainButton(props){
     return <button onClick={props.onClick} className={css['main']}>{props.children}</button>
 }
 
-export function SecondaryButton({children}){
-    return <button className={css['secondary']}>{children}</button>
+export function SecondaryButton(props){
+    return <button onClick={props.onClick} className={css['secondary']}>{props.children}</button>
 }
 
-export function BorderButton({children}){
-    return <button className={css['border']}>{children}</button>
+export function BorderButton(props){
+    return <button onClick={props.onClick} className={css['border']}>{props.children}</button>
 }

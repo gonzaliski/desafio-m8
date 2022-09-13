@@ -4,11 +4,16 @@
     font-size:18px;
     background-color: var(--secondary-color);
     border-radius: 4px;
-    max-width:335px;
+    min-width:210px;
     width: 100%;
     height:50px;
     transition:0.7s ease;
     cursor:pointer;
+}
+@media(min-width:400px){
+    .main,.secondary,.border{
+        min-width: 235px;
+    }
 }
 
 .secondary{

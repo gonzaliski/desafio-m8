@@ -12,3 +12,7 @@ export function ThinText(props){
     return <span className={css["thin"]}>{props.children}</span>
 }
 
+export function ErrorText(props){
+    return <span className={css["error"]}>{props.children}</span>
+}
+

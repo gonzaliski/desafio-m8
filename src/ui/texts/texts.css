@@ -1,6 +1,10 @@
 .disabled{
     color:gray
 }
-.thin{
+.thin,.error{
     font-weight: 400;
+}
+
+.error{
+    color:red;
 }

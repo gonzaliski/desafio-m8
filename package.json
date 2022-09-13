@@ -4,17 +4,22 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "@hookform/resolvers": "^2.9.7",
     "@types/node": "^18.7.13",
     "@types/react": "^18.0.17",
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",
     "file-loader": "^6.2.0",
     "live-server": "^1.2.2",
+    "mapbox-gl": "^2.10.0",
     "react": "^18.2.0",
     "react-burger-menu": "^3.0.8",
     "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.2",
     "react-elastic-carousel": "^0.11.5",
+    "react-hook-form": "^7.34.2",
     "react-icons": "^4.4.0",
+    "react-mapbox-gl": "^5.1.1",
     "react-router-dom": "^6.3.0",
     "recoil": "^0.7.5",
     "recoil-persist": "^4.2.0",
@@ -22,7 +27,8 @@
     "styled-components": "^5.3.5",
     "ts-loader": "^9.3.1",
     "typescript": "^4.7.4",
-    "webpack": "^5.74.0"
+    "webpack": "^5.74.0",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack",

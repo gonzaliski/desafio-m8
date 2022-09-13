@@ -169,10 +169,8 @@ export async function processEmail(email:string){
  }
 
  function processPets(dataToProcess){
-    console.log(dataToProcess);
-    
    let petsToList = map(dataToProcess)
-   let petsProcessed = petsToList.map(pet=>{return {
+   let petsProcessed = petsToList.map((pet:any)=>{return {
      id: pet.id,
      name: pet.name,
      imageURL:pet.image_URL,

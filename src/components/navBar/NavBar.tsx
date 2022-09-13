@@ -97,7 +97,7 @@ const NavContainer = styled.nav`
     display: flex;
     position: fixed;
     height: auto;
-    left: -100%;
+    left: -800%;
     top: 70px;
     gap: 0;
     flex-direction: column;
@@ -113,6 +113,7 @@ const NavContainer = styled.nav`
     .nav-menu {
       flex-direction: row;
       position: static;
+      left:0;
       width: auto;
       height: 100%;
       background-color: transparent;
@@ -144,6 +145,11 @@ const NavContainer = styled.nav`
     padding: 5% 0 ;
     left: 0;
     z-index: 9;
+  }
+  @media (min-width: 768px) {
+    .nav-menu.active {
+    position: initial;
+  }
   }
   .nav-link {
     text-decoration: none;
