@@ -4,11 +4,11 @@ import { MainButton } from "../../ui/buttons";
 import { FormContainer } from "./style";
 import { useNavigate } from "react-router-dom";
 import {useToken, useUserData } from "../../hooks";
-import { MainInput } from "../../ui/inputs";
 import {string,object} from "yup"
 import { yupResolver} from "@hookform/resolvers/yup"
 import { useForm } from "react-hook-form";
 import { FormInput } from "../../components/formInput/FormInput";
+import { LargeTitle } from "../../ui/texts";
 
 const schema = object({
   password:string()
@@ -57,7 +57,7 @@ export function PasswordForm() {
     <div className="content">
         <form  onSubmit={handleSubmit(onSubmit)}  className="form__container">
         <div className="title__container">
-            <h2>Ingrese la contraseña</h2>
+            <LargeTitle>Ingrese la contraseña</LargeTitle>
             </div>
           <div className="form-inputs">
             <FormInput type="password" name="password" id="password" register={register} error={errors.password} label="Contraseña"></FormInput>

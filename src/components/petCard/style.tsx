@@ -8,7 +8,7 @@ export const CardContainer = styled.div`
             width:300px;
             height:auto;
             background-color:white;
-            border: solid 2px black;
+            border: solid 2px var(--border-color);
             border-radius:4px;
         }
         .card-container.found{
@@ -20,28 +20,23 @@ export const CardContainer = styled.div`
         }
         
           .text-container{
-            margin:30px 10px;
+            padding:30px 10px;
+            border-top: 1px solid var(--border-color);
+            display:flex;
+            justify-content: space-between;
+            align-items: center;
           }
           .text-container.no-report{
             display:flex;
             justify-content:space-between;
           }
-          .report-pet-info{
-            text-decoration:underline;
-            color:blue;
-            cursor:pointer;
-          }
-          .report-pet-info.no-report{
-            display:none;
-          }
+
           .edit-button{
-            display:none;
-          }
-          .edit-button.no-report{
-            display:inline;
-            height:24px;
+            width:20px;
+            height:20px;
             cursor:pointer;
           }
+          
           .found-title{
             display:none;
           }

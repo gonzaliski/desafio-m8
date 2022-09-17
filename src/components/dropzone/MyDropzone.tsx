@@ -6,15 +6,15 @@ import { MainButton } from '../../ui/buttons';
 import css from "./myDropzone.css"
 import { FormInput } from '../../components/formInput/FormInput';
 export function MyDropzone(props) {
-  const {register, name, error,id} = props
-  const [selectedImage, setSelectedImage] = useState({} as any)
+  const {register, name, error,id,existingImage} = props
+  const [selectedImage, setSelectedImage] = useState([])
   const onDrop = useCallback((acceptedFiles) => {
     console.log(acceptedFiles);
     acceptedFiles.forEach((file) => {
-      setSelectedImage(
+      setSelectedImage([
         Object.assign(file,{
           preview:URL.createObjectURL(file)
-        })
+        })]
       )
       const reader = new FileReader()
       reader.onabort = () => console.log('file reading was aborted')
@@ -28,28 +28,34 @@ export function MyDropzone(props) {
     })
     
   }, [])
+
+  const remove = e=>{
+    setSelectedImage([]);              // update the state
+    props.upload("")
+  }
   
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop,maxFiles:1})
 
   return (
     <div >
     <div className={css["container"]} {...getRootProps()}>
-      <FormInput {...getInputProps()} {...register("image")} name={name} error={error}/>
-      {(selectedImage.preview) ? (
+      {selectedImage[0] && <a className='delete' onClick={(e)=>remove(e)}>Eliminar</a>}
+      <FormInput {...getInputProps()} {...register ? {...register("image")} : ""} name={name} error={error}/>
+      {(selectedImage[0]) ? (
 
       <div>
-      <img src={selectedImage.preview} alt="image" style={{width:"100%"}}></img>
+      <img src={selectedImage[0].preview} alt="image" style={{width:"100%"}}></img>
     </div>
     ): (
 
       <div>
-      <img src={defaultImg} alt="image2" style={{width:"100%"}}></img>
+      <img src={existingImage || defaultImg} alt="image2" style={{width:"100%"}}></img>
       </div>
     )}
       {
         isDragActive ?
-        <MainButton>Suelte la imagen aqui</MainButton> :
-        <MainButton>Seleccionar imagen</MainButton>
+        <MainButton >Suelte la imagen aqui</MainButton> :
+        <MainButton onClick={(e)=>{e.preventDefault()}}>Seleccionar imagen</MainButton>
       }
       <ThinText>Selecciona una imagen o arrastrala aqui</ThinText>
     </div>

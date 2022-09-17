@@ -14,17 +14,14 @@ export const MyDataContainer = styled.div`
       display:flex;
       flex-direction:column;
       justify-content:space-between;
-      align-items:center;
       gap:20px;
-      max-height: 200px;
    }
-        .form-inputs{
-            display:flex;
-            flex-direction:column;
-            gap:20px;
-            width:100%;
-            padding:0;
-        }
+   @media(min-width: 768px){
+    .form__container{
+        width: 30vw;
+    }
+   }
+
         li{
             gap: 5px;
             display: flex;

@@ -1,11 +1,11 @@
 import React, { useEffect } from "react"
-import { PetList } from "../../components/petList/PetList"
+import { UserPets } from "../../components/userPets/UserPets"
 
 export function MyReports(){
    
     return (
            <div>
-            <PetList/>
+            <UserPets/>
            </div>
             )
 

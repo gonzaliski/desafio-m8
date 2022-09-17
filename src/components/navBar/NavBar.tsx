@@ -2,10 +2,13 @@ import { HamburgerMenu } from "../hamburgerMenu/HamburgerMenu";
 import React, { useState } from "react";
 import PawLogo from "../../assets/paw.png";
 import styled from "styled-components";
-import {FaUserAlt} from "react-icons/fa"
 import { Link, useNavigate } from "react-router-dom";
 import { useToken,useUserData } from "../../hooks";
-import { ThinText } from "../../ui/texts";
+import { LargeTitle, ThinText, UnderlineText } from "../../ui/texts";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from '@fortawesome/free-solid-svg-icons'
+
+
 export function NavBar() {
   const [token, setToken] = useToken()
   let navigate = useNavigate()
@@ -31,24 +34,24 @@ export function NavBar() {
         <nav className={"nav-bar"}>
           <div className={"logo-container"}>
             <Link  to={"/"}>
-            <img src={PawLogo} className={"logo-img"}>
+            <img src={PawLogo}>
 
             </img>
             </Link>
-            <h2 className="logo-title">Pet Finder</h2>
+            <LargeTitle>Pet Finder</LargeTitle>
           </div>
           <ul className={`nav-menu ${clicked ? 'active' : ''}`}>
               <Link onClick={handleClick} className={"nav-link"} to={token ? "/myData" : "/checkEmail"}>Mis datos</Link>
               <Link onClick={handleClick} className={"nav-link"} to={token ? "/myReportedPets" : "/checkEmail"}>Mis mascotas reportadas</Link>
               <Link onClick={handleClick} className={"nav-link"} to={token ? "/reportPet" : "/checkEmail"}>Reportar mascota</Link> 
               <a onClick={showUserInfo} className={"nav-link user"}>
-                <FaUserAlt></FaUserAlt>
+                <FontAwesomeIcon icon={faUser} />
               </a>
             <div  className={`user-info__container menu ${userInfoClicked ? 'active' : ''}`}>
-            <ThinText className={"user-name__display"}>{token ? userData.email : ""}</ThinText>
-            <a onClick={logOut}className={`log-out ${!token ? 'disabled' : ''}`}>
+            <ThinText >{token ? userData.email : ""}</ThinText>
+            <UnderlineText onClick={logOut} className={`log-out ${!token ? 'disabled' : ''}`}>
             Cerrar sesión
-            </a>
+            </UnderlineText>
         </div>
           </ul>
           <div className="hamburger-container">
@@ -191,7 +194,7 @@ const NavContainer = styled.nav`
   .user-info__container.menu.active {
     position: absolute;
     top: 0;
-    height:20%;
+    height:175px;
     padding-bottom:20px;
     gap:5px;
     z-index: -1;

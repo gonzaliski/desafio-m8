@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const ReportContainer = styled.div`
 .container{
     height: var(--remaining-page-height);
-      overflow:auto;
+    overflow:auto;
 }
 .content{
       padding-bottom: 15px;
@@ -40,7 +40,7 @@ export const ReportContainer = styled.div`
       width:100%;
       display: inline-block;
       text-align:left;
-      margin-bottom:30px;
+      margin:30px 0px;
   }
   .image-drop__container{
     width:100%;
@@ -92,12 +92,7 @@ export const ReportContainer = styled.div`
     .founded-button.active{
       display:inline;
     }
-    .unpublish-pet__link{
-      display:none;
-    }
-    .unpublish-pet__link.active{
-      display:inline;
-      text-decoration: underline;
-      cursor:pointer;
+    a{
+      text-align: center;
     }
 `

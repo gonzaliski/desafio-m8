@@ -8,9 +8,10 @@
     --secondary-color: #FF9DF5;
     --tertiary-color:#97EA9F;
     --found-color:#32a852;
+    --border-color:#555555;
     --header-height:75px;
-    --remaining-page-height: calc(100vh - var(--header-height))
-
+    --remaining-page-height: calc(100vh - var(--header-height));
+    --boxes-min-width:235px;
 }
 body{
     font-family: 'Roboto';

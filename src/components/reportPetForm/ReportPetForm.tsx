@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import { BorderButton, MainButton, SecondaryButton } from "../../ui/buttons";
-import { MainInput } from "../../ui/inputs";
 import { ReportContainer } from "./style";
 import { MyDropzone } from "../dropzone/MyDropzone";
 import { useForm } from "react-hook-form";
 import { string, object } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ErrorText } from "../../ui/texts";
 import { FormInput } from "../formInput/FormInput";
 import { MapboxSeach } from "../../components/mapbox/Mapbox";
+import { useToken, useUserData } from "../../hooks";
+import { reportPet } from "../../lib/api";
+import { useNavigate
+} from "react-router-dom";
+import { LargeTitle, ThinText } from "../../ui/texts";
 
 const schema = object({
   name: string().required("Se necesita el nombre de la mascota"),
@@ -17,12 +20,14 @@ const schema = object({
 });
 
 export function ReportPetForm() {
-  const [imgURL, setImgURL] = useState("");
-  const [location, setLocation] = useState({});
+  const navigate = useNavigate()
+  //despues cambiar por un hook que solamente me traiga el userData y no el setter (con token lo mismo)
+  const [userData, setUserData] = useUserData();
+  const [token, setToken] = useToken();
+  const [location, setLocation] = useState([]);
   const {
     register,
     handleSubmit,
-    reset,
     clearErrors ,
     setValue,
     formState: { errors },
@@ -30,33 +35,38 @@ export function ReportPetForm() {
     mode: "onBlur",
     resolver: yupResolver(schema),
   });
-  const onSubmit = (data) => {
-
-    console.log("la data",data)
+  const onSubmit = async (data) => {
+    const formattedData = {
+      imageURL:data.image,
+      petName: data.name,
+      lng:location[0],
+      lat:location[1],
+      locationName:data.locationName,
+    }
+    console.log(formattedData)
+    const createReport = await reportPet(formattedData,token,userData.id)
+    console.log(createReport)
   };
 
   const uploadURL = (value) => {
-    setImgURL(value);
     setValue('image',value)
     clearErrors('image');
   };
   function handleMapboxChange(data) {
     // voy agregando data al state interno del form
-    setLocation({
-      data
-    });
+    setLocation(
+      data.coords
+    );
     setValue('locationName',data.query)
     clearErrors('locationName');
   }
-  console.log(location);
-
 
   return (
     <ReportContainer>
       <div className="container">
         <div className="content">
           <div className="title__container">
-            {/* <h2>{cs.editMode ? "Editar" : "Reportar"} mascota perdida</h2> */}
+          <LargeTitle>Reportar mascota</LargeTitle>
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="report-container">
@@ -80,18 +90,17 @@ export function ReportPetForm() {
             <div className="form-inputs">
               <MapboxSeach onChange={handleMapboxChange} register={register} error={errors.locationName}/>
             </div>
-            <p className="location-text">
+            <ThinText className="location-text">
               Buscá un punto de referencia para reportar a tu mascota. Puede ser
               una dirección, un barrio o una ciudad.
-            </p>
+            </ThinText>
 
             <MainButton className="report-button">
               Reportar como perdido
             </MainButton>
           </form>
             <SecondaryButton>Reportar como encontrado</SecondaryButton>
-            <BorderButton onClick={() => reset()}>Cancelar</BorderButton>
-            {/* <a className="{cs.editMode? "unpublish-pet__link active": "unpublish-pet__link"}">Despublicar</a> */}
+            <BorderButton onClick={() => navigate("/",{replace:true})}>Cancelar</BorderButton>
         </div>
       </div>
     </ReportContainer>

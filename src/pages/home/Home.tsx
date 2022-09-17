@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react"
-import { UserUbication } from "../../components/userUbication/UserUbication";
+import React from "react"
+import { NearPets } from "../../components/nearPets/NearPets";
 export function Home(){
         return (
             <div>
-                <UserUbication/>
+                <NearPets/>
             </div>
         )
     

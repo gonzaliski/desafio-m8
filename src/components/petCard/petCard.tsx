@@ -1,24 +1,44 @@
+import { useUserPets } from "../../hooks"
 import React from "react"
-import {MdModeEdit} from 'react-icons/md'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen } from '@fortawesome/free-solid-svg-icons'
 import {CardContainer} from './style'
+import { SecondarySubtitle, Subtitle, UnderlineText } from "../../ui/texts";
+import { useNavigate } from "react-router-dom";
 
 export function PetCard(props){
-    return(
+       const userPets = useUserPets()
+      const navigate = useNavigate()
+      function isUserPet(id){
+        const res = userPets.find((p)=>p.id==id)
+        return  res
+      }
+      const editPet = ()=>{
+        navigate(`/editPet/${props.id}`,{replace:true, state:{prevPath:location.pathname}})
+      }
+      const handleReport = (e)=>{
+        e.preventDefault()
+        console.log("hice click, esto sale de la card");
+        
+        props.onReportInfo({id:props.id, name:props.name})
+      }
+
+    return (
         <CardContainer>
 
         <div className="card-container">
             <img className="pet-img" src={props.source}></img>
             <div className="text-container">
               <div>
-                <h3 className="pet-name__title">{props.name}</h3>
-                <h5 className="pet-name__title">{(props.locationName).toUpperCase()}</h5>
+                <Subtitle>{props.name}</Subtitle>
+                <SecondarySubtitle>{(props.locationName).toUpperCase()}</SecondarySubtitle>
+                {!isUserPet(props.id) && <UnderlineText onClick={handleReport}>Reportar información</UnderlineText>}
+                { (isUserPet(props.id) && props.found) && <a className="delete-pet__link">Eliminar</a>}
+                {props.found &&<Subtitle className="found-title">Encontrado!</Subtitle>}
               </div>
-            <MdModeEdit  className="edit-button"></MdModeEdit>
+            { isUserPet(props.id) && <FontAwesomeIcon onClick={editPet} icon={faPen} className="edit-button"/>}
             
-            <a className="report-pet-info">Reportar información</a>
-            {/* <h3 className="found-title">Encontrado!</h3> */}
             </div>
-            {/* <a className="delete-pet__link">Eliminar</a> */}
         </div>
         </CardContainer>
     )

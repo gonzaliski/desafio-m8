@@ -2,6 +2,7 @@ declare module "*.css";
 declare module "*.png";
 declare module "*.jpg";
 
+
 type userData = {
     fullName?:string,
     email?:string,
@@ -16,11 +17,11 @@ type authData = {
 type petData = {
     id:number,
     name:string,
-    image_URL:string,
+    imageURL:string,
     found:boolean,
     lat:number,
     lng:number,
-    zone:string
+    locationName:string
 }
 
 
@@ -29,6 +30,7 @@ type MapBoxSearchProps = {
     register?: any
     name?:string
     error?:{}
+    [x:string]:any
   };
 
   type DropzoneProps = {
@@ -38,10 +40,21 @@ type MapBoxSearchProps = {
     className:string;
 
   }
-  type FormInputProps = {
+
+type prevPathState = {
+    prevPath:string
+}
+
+type petListProps = {
+    from?: "user" | "all"
+    caseNotFound:string
+}
+
+type inputProps = {
     id?:string
     register?:any
+    large?:string
     error?:any
     label?:string
     [x:string]:any
-  }
+}

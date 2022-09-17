@@ -20,17 +20,7 @@ export const FormContainer = styled.div`
     .form-inputs{
         width:100%;
         padding:0;
-    } 
-    .form-label{
-      font-size:16px;
-      font-weight:500;
-  }
-  .form-input{
-      width:100%;
-      border: 2px solid #000000;
-      border-radius: 4px;
-      height:30px;
-  }                                         
+    }                                 
     .title__container{
       width:100%;
       display: inline-block;

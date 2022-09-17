@@ -1,4 +1,4 @@
-import { getUser, signUp, updateUser } from "../lib/api";
+import { getMyPets, getUser, signUp, updateUser } from "../lib/api";
 import { atom, selector } from "recoil";
 import { recoilPersist } from "recoil-persist";
 const { persistAtom } = recoilPersist();
@@ -25,4 +25,14 @@ export const nearPetsState = atom({
 export const reportedPetsState = atom({
   key:'reportedPetsState',
   default:[],
+})
+
+export const userPetsSelector = selector({
+  key:'userPetsSelector',
+  get:async({get})=>{
+    const userData = get(userDataState)
+    const token = get(tokenState)
+    const res = await getMyPets(userData.id,token)
+    return res
+  }
 })

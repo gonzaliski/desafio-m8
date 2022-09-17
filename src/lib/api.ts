@@ -74,39 +74,29 @@ export async function processEmail(email:string){
    
    return {fullName:newData.full_name}
  }
- export async function reportPet(data){
-   const cs = this.getState()
-   const createPet = await fetch(API_BASE_URL + "/new-pet" + "?userId=" + cs.userId,{
+ export async function reportPet(data,token,userId){
+   const createPet = await fetch(API_BASE_URL + "/new-pet" + "?userId=" + userId,{
      method:"post",
      headers:{
        "Content-Type": "application/json",
-       Authorization: `bearer ${cs.token}`,
+       Authorization: `bearer ${token}`,
      },
      body:JSON.stringify(data)
    })
    const newPet = await createPet.json()
    return newPet
  }
- export async function updatePet(data){
-   const cs = this.getState()
-   const updatePet = await fetch(API_BASE_URL + "/update-pet" + "?petId=" + cs.petToEdit.id,{
+ export async function updatePet(data,token,id){
+   const updatePet = await fetch(API_BASE_URL + "/update-pet" + "?petId=" + id,{
      method:"put",
      headers:{
        "Content-Type": "application/json",
-       Authorization: `bearer ${cs.token}`,
+       Authorization: `bearer ${token}`,
      },
      body:JSON.stringify(data)
    })
    const updatePetRes = await updatePet.json()
    return updatePetRes
- }
- function currentMarkerPosition(lng, lat){
-   const cs = this.getState()
-   cs.petToReportLat = lat
-   cs.petToReportLng = lng
-   console.log("lat:",cs.petToReportLat," lng:",cs.petToReportLng);
-   
-   
  }
 
  export async function getMyPets(userId:number,token:string){

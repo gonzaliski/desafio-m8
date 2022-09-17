@@ -8,6 +8,7 @@ import {string,object} from "yup"
 import { yupResolver} from "@hookform/resolvers/yup"
 import { useForm } from "react-hook-form";
 import { FormInput } from "../../components/formInput/FormInput";
+import { LargeTitle } from "../../ui/texts";
 
 const schema = object({
   email:string().email('Debe ingresar un email válido').required('Se necesita un email'),
@@ -48,7 +49,7 @@ export function EmailForm() {
     <div className="content">
         <form  onSubmit={handleSubmit(onSubmit)}  className="form__container">
             <div className="title__container">
-            <h2>Ingresar</h2>
+            <LargeTitle>Ingresar</LargeTitle>
             </div>
           <div className="form-inputs">
              <FormInput type="email" name="email" id="email" register={register} error={errors.email} label="Email"></FormInput>

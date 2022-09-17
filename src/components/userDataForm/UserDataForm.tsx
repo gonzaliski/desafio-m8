@@ -1,14 +1,13 @@
 import { getUser, signUp, updateUser } from "../../lib/api";
 import React, { useState } from "react";
 import { MainButton } from "../../ui/buttons";
-import { MainInput } from "../../ui/inputs";
 import { useNavigate } from "react-router-dom";
 import { useToken, useUserData } from "../../hooks";
 import {MyDataContainer} from "./style"
 import { useForm } from "react-hook-form"
 import {string,object, ref} from "yup"
 import { yupResolver} from "@hookform/resolvers/yup"
-import { ErrorText } from "../../ui/texts"
+import {LargeTitle } from "../../ui/texts"
 import { FormInput } from "../formInput/FormInput"
 
 const newUserSchema = object({
@@ -89,11 +88,11 @@ export function UserDataForm() {
   return submited ? 
     token ?
       ( <div>
-          <h2>Cambios realizados correctamente!</h2>
+          <LargeTitle>Cambios realizados correctamente!</LargeTitle>
         </div>)
         :
         ( <div>
-          <h2>Registrado correctamente!</h2>
+          <LargeTitle>Registrado correctamente!</LargeTitle>
         </div>)
   : 
      (
@@ -102,12 +101,11 @@ export function UserDataForm() {
         <div className="content">
             <form className="form__container" onSubmit={ handleSubmit(onSubmit)}>
             <div className="title__container">
-              <h2>Mis Datos</h2>
+              <LargeTitle>Mis Datos</LargeTitle>
             </div>
                   {/* <input className="form-input name" name="name" type="text" placeholder={${cs.fullName || ""}}></input> */}
                   <FormInput type="text" name="name" id="name" register={register} error={errors.name} label="Nombre"
-                  value={token ? userData.fullName : ""}></FormInput>
-          
+                  defaultValue={token ? userData.fullName : ""}></FormInput>
                  <FormInput type="password" name="password" id="password"register={register} error={errors.password} label="Contraseña"></FormInput>
                  <FormInput type="password" name="passwordConfirmation" id="passwordConfirmation" register={register} 
                  error={errors.passwordConfirmation} label="Confirmar contraseña" ></FormInput>
