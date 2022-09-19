@@ -8,6 +8,7 @@
 
 .error{
     color:red;
+    display: block;
 }
 
 .underline{
