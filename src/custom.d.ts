@@ -14,6 +14,11 @@ type authData = {
     password:string
 }
 
+type location = {
+    lat:number,
+    lng:number
+}
+
 type petData = {
     id:number,
     name:string,

@@ -37,9 +37,12 @@ export function ReportInfo(props) {
       lastSeenLocation:data.information,
     phoneNumber:data.phoneNumber,
     reporterName:data.name,
+    petName:pet.name
     }
     const res = await reportInfo(formattedData,pet.id)
-    if (res) handleClose()
+    if (res) {
+      alert("Se ha enviado el reporte")
+      handleClose()}
   };
 
  

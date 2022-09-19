@@ -35,8 +35,6 @@ export function PasswordForm() {
     const [token,setToken] = useToken()
     const onSubmit = async (e)=>{
         let token = await signIn(userData.email, e.password)
-        console.log(token);
-        
         if(token){
           setToken(token)
           navigate("/",{replace:true})
@@ -46,9 +44,10 @@ export function PasswordForm() {
        
     }
     useEffect(()=>{
-      console.log("userData updated",token);
-      
-    },[token])
+      if(!userData.email){
+        navigate("/",{replace:true})
+      }
+    },[userData.email])
 
   return (
     <div>

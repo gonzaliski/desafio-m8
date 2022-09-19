@@ -1,5 +1,5 @@
 import { getUser, signUp, updateUser } from "../../lib/api";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MainButton } from "../../ui/buttons";
 import { useNavigate } from "react-router-dom";
 import { useToken, useUserData } from "../../hooks";
@@ -51,10 +51,8 @@ export function UserDataForm() {
 
 
     const onSubmit = async(e) =>{
-        console.log(e);
         //todo fetch Api
         const userExist = await getUser(userData.email)
-        console.log("existe en la DB",userExist);
         let res
         if(userExist){
         res = await updateUser({
@@ -63,7 +61,6 @@ export function UserDataForm() {
             token,
             id:userData.id} )
         }else{
-            console.log("a");
             
             res = await signUp({
                 email:userData.email,
@@ -71,8 +68,7 @@ export function UserDataForm() {
                 password:e.password
             })
         }
-        console.log(res);
-        if(res.fullName){
+        if(res && res.fullName){
           setUserData(prev =>({
             ...prev,
             fullName:res.fullName
@@ -80,18 +76,24 @@ export function UserDataForm() {
         }
         setSubmited(true)
         setTimeout(()=>{
-          navigate(`/`, { replace: true })
+          if(res.id) {navigate("/checkEmail",{replace:true})}
+          else {navigate(`/`, { replace: true })}
         },2000)   
         
     }
+    useEffect(()=>{
+      if(!token){
+        navigate("/",{replace:true})
+      }
+    },[token])
 
   return submited ? 
     token ?
-      ( <div>
+      ( <div className="success-container">
           <LargeTitle>Cambios realizados correctamente!</LargeTitle>
         </div>)
         :
-        ( <div>
+        ( <div className="success-container"> 
           <LargeTitle>Registrado correctamente!</LargeTitle>
         </div>)
   : 

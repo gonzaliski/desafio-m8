@@ -44,4 +44,11 @@ export const MyDataContainer = styled.div`
         .err{
             color:red;
         }
+
+        .success-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top:20%;
+        }
 `

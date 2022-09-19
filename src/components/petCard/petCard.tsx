@@ -6,7 +6,7 @@ import {CardContainer} from './style'
 import { SecondarySubtitle, Subtitle, UnderlineText } from "../../ui/texts";
 import { useNavigate } from "react-router-dom";
 
-export function PetCard(props){
+export function   PetCard(props){
        const userPets = useUserPets()
       const navigate = useNavigate()
       function isUserPet(id){
@@ -18,8 +18,6 @@ export function PetCard(props){
       }
       const handleReport = (e)=>{
         e.preventDefault()
-        console.log("hice click, esto sale de la card");
-        
         props.onReportInfo({id:props.id, name:props.name})
       }
 

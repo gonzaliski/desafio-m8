@@ -17,8 +17,6 @@ export function UserPets(){
         setReportedPets(res)
     }
     useEffect(()=>{
-        console.log("params cambio a myreports");
-        
         fetchReportedPets()
     },[param])
     return (

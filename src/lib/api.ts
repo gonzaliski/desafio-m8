@@ -21,16 +21,10 @@ export async function processEmail(email:string){
      })
    })
    const newUser = await createdUser.json()
-    //  cs.userId = newUser
-   let token
-   signIn(data.email,data.password).then((tk)=>{
-    token = tk
 
     return {
-     id:newUser,
-     token,
-           }       
-  })
+     id:newUser 
+    }       
  }
 
  export async function signIn(email:string,password:string){
@@ -44,18 +38,6 @@ export async function processEmail(email:string){
    })
    const verifRes = await passwordVerif.json()
    return verifRes        
- }
-
- export async function updateOrCreateUser(userData){
-   const cs = this.getState()
-   const userExist = await getUser(cs.email)
-   var res
-   if(userExist){
-    res = await this.updateUser(userData)
-   }else{
-     res = await this.signUp(userData)
-   }
-   return res
  }
  
  export async function updateUser(userData){
@@ -112,28 +94,23 @@ export async function processEmail(email:string){
    let petsToList = processPets(petsToJson)
    return petsToList
  }
- export async function reportFound(petId){
-   const cs = this.getState()
+ export async function reportFound(petId,token){
    const reportPetFound = await fetch(API_BASE_URL + "/pet-found" + "?petId=" + petId,{
      method:"put",
      headers:{
        "Content-Type": "application/json",
-       Authorization: `bearer ${cs.token}`,
+       Authorization: `bearer ${token}`,
      } })
    const updatePetRes = await reportPetFound.json()
    return updatePetRes
  }
  
- export async function deletePet(petId){
-   const cs = this.getState()
-   let index = cs.userPets.indexOf(cs.userPets.find((pet)=>{return pet.id == petId}))
-   cs.userPets.splice(index,1)
-   
+ export async function deletePet(petId,token){
    const deletePet = await fetch(API_BASE_URL + "/pet" + "?petId=" + petId,{
      method:"delete",
      headers:{
        "Content-Type": "application/json",
-       Authorization: `bearer ${cs.token}`,
+       Authorization: `bearer ${token}`,
      } })
    const deletePetRes = await deletePet.json()
    return deletePetRes

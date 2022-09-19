@@ -6,7 +6,7 @@ import css from "./petList.css"
 import { ReportInfo } from "../../components/reportInfo/ReportInfo";
 
 export function PetList(props:petListProps) {
-  const [nearPets,setNearPets] = useNearPets()
+  const nearPets = useNearPets()
   const [showReportInfo,setShowReportInfo] = useState(false)
   const [petToReport,setPetToReport] = useState(null)
   const userPets = useUserPets()
@@ -14,7 +14,6 @@ export function PetList(props:petListProps) {
   if(props.from == "user") reportedPets=userPets
 
   const handleClick= (data)=>{
-    console.log("hice click en reportar");
     setPetToReport(data)
     setShowReportInfo(true)
   }

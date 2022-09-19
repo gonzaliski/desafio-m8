@@ -15,14 +15,24 @@ export function NavBar() {
   const [userData, setUserData] = useUserData()
   const [clicked, setClicked] = useState(false);
   const [userInfoClicked, setUserInfoClicked] = useState(false)
-  const handleClick = () => {
+  function handleClick(){
     setClicked(!clicked);
+    
   };
   const showUserInfo = ()=>{
+    if(!token){
+      navigate("/checkEmail",{replace:true})
+    }else{
+      handleUserInfo()
+    }   
+  }
+
+  function handleUserInfo(){
     setUserInfoClicked(!userInfoClicked)
   }
+
   const logOut = ()=>{
-    handleClick()
+    handleUserInfo()
     setUserData({})
     setToken("")
     navigate("/",{replace:true})
@@ -41,9 +51,9 @@ export function NavBar() {
             <LargeTitle>Pet Finder</LargeTitle>
           </div>
           <ul className={`nav-menu ${clicked ? 'active' : ''}`}>
-              <Link onClick={handleClick} className={"nav-link"} to={token ? "/myData" : "/checkEmail"}>Mis datos</Link>
-              <Link onClick={handleClick} className={"nav-link"} to={token ? "/myReportedPets" : "/checkEmail"}>Mis mascotas reportadas</Link>
-              <Link onClick={handleClick} className={"nav-link"} to={token ? "/reportPet" : "/checkEmail"}>Reportar mascota</Link> 
+              <Link onClick={()=>handleClick()} className={"nav-link"} to={token ? "/myData" : "/checkEmail"}>Mis datos</Link>
+              <Link onClick={()=>handleClick()} className={"nav-link"} to={token ? "/myReportedPets" : "/checkEmail"}>Mis mascotas reportadas</Link>
+              <Link onClick={()=>handleClick()} className={"nav-link"} to={token ? "/reportPet" : "/checkEmail"}>Reportar mascota</Link> 
               <a onClick={showUserInfo} className={"nav-link user"}>
                 <FontAwesomeIcon icon={faUser} />
               </a>
@@ -57,7 +67,7 @@ export function NavBar() {
           <div className="hamburger-container">
           <HamburgerMenu
             clicked={clicked}
-            handleClick={handleClick}
+            handleClick={()=>handleClick()}
             />
             </div>
         </nav>

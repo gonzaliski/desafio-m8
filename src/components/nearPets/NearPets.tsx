@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react"
+import React, { Suspense, useEffect, useState } from "react"
 import { MainButton } from "../../ui/buttons"
 import { LargeTitle, ThinText } from "../../ui/texts";
 import css from "./nearPets.css"
-import { nearPets } from "../../lib/api";
-import { useNearPets } from "../../hooks";
+import { useNearPets, useUserLocation } from "../../hooks";
 import { PetList } from "../../components/petsList/PetsList";
+import { Loading } from "../../components/loading/Loading";
+import { useParams } from "react-router-dom";
 export function NearPets(){
-    const [petsNearUser, setPetsNearUser] = useNearPets()
-    const [ubication, setUbication] = useState({lat:null,lng:null})
-    console.log(ubication);
+    const params = useParams()
+    const petsNearUser = useNearPets()
+    const [ubication, setUbication] = useUserLocation()
     const handleClick = async()=>{
         navigator.geolocation.getCurrentPosition((pos)=>{
             setUbication({
@@ -19,24 +20,19 @@ export function NearPets(){
        
         // navigate("/petsNear", { replace: true });
     } 
-    async function fetchPets(){
-        setPetsNearUser(await nearPets(ubication))
-
-    }
     useEffect(()=>{
-        if(ubication.lat && ubication.lng){
-            fetchPets()
-        }
-        console.log(petsNearUser);
-        
-    },[ubication])
+        handleClick()
+    },[params])
 
 
     return (petsNearUser.length > 0) ?
     (
     <div  className={css["pets-container"]}>
+        <Suspense fallback={<Loading/>}>
+
         <LargeTitle>Mascotas perdidas cerca tuyo</LargeTitle>
         <PetList caseNotFound={"No hay mascotas cera de tu ubicación"}/>
+        </Suspense>
         </div>
         )
         :
@@ -49,4 +45,5 @@ export function NearPets(){
         </div>)
     
 }
+
 

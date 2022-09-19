@@ -1,4 +1,4 @@
-import { getMyPets, getUser, signUp, updateUser } from "../lib/api";
+import { getMyPets, getUser, nearPets, signUp, updateUser } from "../lib/api";
 import { atom, selector } from "recoil";
 import { recoilPersist } from "recoil-persist";
 const { persistAtom } = recoilPersist();
@@ -17,9 +17,9 @@ export const tokenState = atom({
     effects_UNSTABLE: [persistAtom],
   });
 
-export const nearPetsState = atom({
-  key:'nearPetsState',
-  default:[],
+export const userLocationState = atom({
+  key:'locationState',
+  default:{} as location,
 })
 
 export const reportedPetsState = atom({
@@ -33,6 +33,15 @@ export const userPetsSelector = selector({
     const userData = get(userDataState)
     const token = get(tokenState)
     const res = await getMyPets(userData.id,token)
+    return res
+  }
+})
+
+export const nearPetsSelector = selector({
+  key:"nearPetsSelector",
+  get:async({get})=>{
+    const currentLocation = get(userLocationState)
+    const res = await nearPets(currentLocation)
     return res
   }
 })

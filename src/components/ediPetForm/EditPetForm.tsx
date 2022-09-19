@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { FormInput } from "../formInput/FormInput";
 import { MapboxSeach } from "../mapbox/Mapbox";
 import { useToken, useUserPets } from "../../hooks";
-import { updatePet } from "../../lib/api";
+import { deletePet, reportFound, updatePet } from "../../lib/api";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { LargeTitle, ThinText, UnderlineText } from "../../ui/texts";
 
@@ -40,16 +40,19 @@ export function EditPetForm() {
       lat:location[1],
       locationName:data.locationName,
     }
-    console.log(formattedData)
     const createReport = await updatePet(formattedData,token,pet.id)
     console.log(createReport)
+    alert("Mascota actualizada")
+    backToPrev()
   };
 
   const uploadURL = (value) => {
     setValue('image',value)
   };
-  const setFound = () =>{
-
+  async function setFound(){
+    await reportFound(pet.id,token)
+    alert("Mascota actualizada")
+    backToPrev()
   }
   function handleMapboxChange(data) {
     // voy agregando data al state interno del form
@@ -58,21 +61,28 @@ export function EditPetForm() {
     );
     setValue('locationName',data.query)
   }
+  function backToPrev(){
+    navigate(`${prevPath}`,{replace:true})
+  }
+  async function deleteActualPet(){
+    await deletePet(pet.id, token)
+    alert("Mascota despublicada")
+    backToPrev()
+  }
 
   useEffect(()=>{
-    console.log("nuevos params:",param,"id:",param.id);
-    
     const foundPet =  getPet()
     setPet(foundPet)
     console.log(foundPet);
     
     if(!foundPet){
-      navigate(`${prevPath}`,{replace:true})
+      backToPrev()
     }
     
   },[param])
 
   return (
+
     <ReportContainer>
       <div className="container">
         <div className="content">
@@ -110,11 +120,12 @@ export function EditPetForm() {
 
             <MainButton>Guardar</MainButton>
           </form>
-            <SecondaryButton onClick={setFound}>Reportar como encontrado</SecondaryButton>
-            <BorderButton onClick={() => {}}>Cancelar</BorderButton>
-            <UnderlineText className="unpublish">Despublicar</UnderlineText>
+            <SecondaryButton onClick={()=>setFound()}>Reportar como encontrado</SecondaryButton>
+            <BorderButton onClick={()=>backToPrev()}>Cancelar</BorderButton>
+            <UnderlineText onClick={()=>deleteActualPet()} className="unpublish">Despublicar</UnderlineText>
         </div>
       </div>
     </ReportContainer>
+
   );
 }

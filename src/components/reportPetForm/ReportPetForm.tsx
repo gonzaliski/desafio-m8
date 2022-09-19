@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { BorderButton, MainButton, SecondaryButton } from "../../ui/buttons";
 import { ReportContainer } from "./style";
 import { MyDropzone } from "../dropzone/MyDropzone";
@@ -12,6 +12,7 @@ import { reportPet } from "../../lib/api";
 import { useNavigate
 } from "react-router-dom";
 import { LargeTitle, ThinText } from "../../ui/texts";
+import { Loading } from "../../components/loading/Loading";
 
 const schema = object({
   name: string().required("Se necesita el nombre de la mascota"),
@@ -43,9 +44,9 @@ export function ReportPetForm() {
       lat:location[1],
       locationName:data.locationName,
     }
-    console.log(formattedData)
     const createReport = await reportPet(formattedData,token,userData.id)
-    console.log(createReport)
+    alert("reporte creado")
+    navigate("/",{replace:true})
   };
 
   const uploadURL = (value) => {
@@ -62,6 +63,7 @@ export function ReportPetForm() {
   }
 
   return (
+    <Suspense fallback={<Loading/>}>
     <ReportContainer>
       <div className="container">
         <div className="content">
@@ -99,10 +101,11 @@ export function ReportPetForm() {
               Reportar como perdido
             </MainButton>
           </form>
-            <SecondaryButton>Reportar como encontrado</SecondaryButton>
             <BorderButton onClick={() => navigate("/",{replace:true})}>Cancelar</BorderButton>
         </div>
       </div>
     </ReportContainer>
+    </Suspense>
+
   );
 }
