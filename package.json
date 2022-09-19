@@ -14,6 +14,7 @@
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",
     "file-loader": "^6.2.0",
+    "firebase-tools": "^11.9.0",
     "live-server": "^1.2.2",
     "mapbox-gl": "^2.10.0",
     "react": "^18.2.0",
