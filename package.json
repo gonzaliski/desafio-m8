@@ -38,10 +38,12 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack",
     "build": "cross-env NODE_ENV=production webpack",
-    "start": "live-server"
+    "start": "live-server",
+    "pretty": "prettier --write \"./**/*.{js,jsx,json}\""
   },
   "devDependencies": {
     "@types/styled-components": "^5.1.26",
+    "prettier": "^2.7.1",
     "webpack-cli": "^4.10.0"
   }
 }

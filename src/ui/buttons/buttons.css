@@ -1,37 +1,41 @@
-.main,.secondary,.border{
-    font-family:'Poppins';
-    font-weight:bold;
-    font-size:18px;
-    background-color: var(--secondary-color);
-    border-radius: 4px;
-    min-width:210px;
-    border-color:var(--border-color);
-    width: 100%;
-    height:50px;
-    transition:0.7s ease;
-    cursor:pointer;
+.main,
+.secondary,
+.border {
+  font-family: "Poppins";
+  font-weight: bold;
+  font-size: 18px;
+  background-color: var(--secondary-color);
+  border-radius: 4px;
+  min-width: 210px;
+  border-color: var(--border-color);
+  width: 100%;
+  height: 50px;
+  transition: 0.7s ease;
+  cursor: pointer;
 }
-@media(min-width:400px){
-    .main,.secondary,.border{
-        min-width: 235px;
-    }
-}
-
-.secondary{
-    background-color: var(--tertiary-color);
-}
-
-.border{
-    color:var(--main-color);
-    background:transparent;
-    border: solid 3px var(--main-color);
-    border-radius: 4px;
+@media (min-width: 400px) {
+  .main,
+  .secondary,
+  .border {
+    min-width: 235px;
+  }
 }
 
-.main:hover{
-    color:white;
+.secondary {
+  background-color: var(--tertiary-color);
 }
-.border:hover{
-    background-color: var(--main-color);
-    color:white;
+
+.border {
+  color: var(--main-color);
+  background: transparent;
+  border: solid 3px var(--main-color);
+  border-radius: 4px;
+}
+
+.main:hover {
+  color: white;
+}
+.border:hover {
+  background-color: var(--main-color);
+  color: white;
 }
