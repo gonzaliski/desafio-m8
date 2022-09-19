@@ -5,6 +5,7 @@ import { faPen } from '@fortawesome/free-solid-svg-icons'
 import {CardContainer} from './style'
 import { SecondarySubtitle, Subtitle, UnderlineText } from "../../ui/texts";
 import { useNavigate } from "react-router-dom";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 export function   PetCard(props){
        const userPets = useUserPets()
@@ -34,7 +35,7 @@ export function   PetCard(props){
                 { (isUserPet(props.id) && props.found) && <a className="delete-pet__link">Eliminar</a>}
                 {props.found &&<Subtitle className="found-title">Encontrado!</Subtitle>}
               </div>
-            { isUserPet(props.id) && <FontAwesomeIcon onClick={editPet} icon={faPen} className="edit-button"/>}
+            { isUserPet(props.id) && <FontAwesomeIcon onClick={editPet} icon={faPen as IconProp} className="edit-button"/>}
             
             </div>
         </div>

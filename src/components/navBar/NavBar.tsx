@@ -7,6 +7,7 @@ import { useToken,useUserData } from "../../hooks";
 import { LargeTitle, ThinText, UnderlineText } from "../../ui/texts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 
 export function NavBar() {
@@ -55,7 +56,7 @@ export function NavBar() {
               <Link onClick={()=>handleClick()} className={"nav-link"} to={token ? "/myReportedPets" : "/checkEmail"}>Mis mascotas reportadas</Link>
               <Link onClick={()=>handleClick()} className={"nav-link"} to={token ? "/reportPet" : "/checkEmail"}>Reportar mascota</Link> 
               <a onClick={showUserInfo} className={"nav-link user"}>
-                <FontAwesomeIcon icon={faUser} />
+                <FontAwesomeIcon icon={faUser as IconProp} />
               </a>
             <div  className={`user-info__container menu ${userInfoClicked ? 'active' : ''}`}>
             <ThinText >{token ? userData.email : ""}</ThinText>

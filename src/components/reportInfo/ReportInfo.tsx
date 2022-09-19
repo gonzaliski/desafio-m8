@@ -9,6 +9,7 @@ import css from "./reportInfo.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { reportInfo } from "../../lib/api";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 const schema = object({
   name: string().required("Ingrese su nombre"),
@@ -56,7 +57,7 @@ export function ReportInfo(props) {
         >
           <div>
             <div onClick={handleClose} className={css["close__content"]}>
-              <FontAwesomeIcon icon={faX} />
+              <FontAwesomeIcon icon={faX as IconProp} />
             </div>
           </div>
           <div className={css["title__container"]}>
