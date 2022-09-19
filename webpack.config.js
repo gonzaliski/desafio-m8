@@ -11,6 +11,7 @@ if (dev) {
 
 module.exports = {
   mode: process.env.NODE_ENV,
+  devtool:false,
   watch: true,
   entry: "./src/index.tsx",
   module: {
