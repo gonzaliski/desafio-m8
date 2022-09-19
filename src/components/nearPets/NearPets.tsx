@@ -20,12 +20,9 @@ export function NearPets(){
        
         // navigate("/petsNear", { replace: true });
     } 
-    useEffect(()=>{
-        handleClick()
-    },[params])
 
 
-    return (petsNearUser.length > 0) ?
+    return (petsNearUser) ?
     (
     <div  className={css["pets-container"]}>
         <Suspense fallback={<Loading/>}>

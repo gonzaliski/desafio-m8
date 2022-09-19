@@ -41,7 +41,9 @@ export const nearPetsSelector = selector({
   key:"nearPetsSelector",
   get:async({get})=>{
     const currentLocation = get(userLocationState)
-    const res = await nearPets(currentLocation)
-    return res
+    if(currentLocation.lng && currentLocation.lat){
+      const res = await nearPets(currentLocation)
+      return res
+    }
   }
 })
