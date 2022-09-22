@@ -8,6 +8,10 @@ export function Subtitle(props){
     return <h3>{props.children}</h3>
 }
 
+export function Success(props){
+    return <h3 className={css["success"]}>{props.children}</h3>
+}
+
 export function DisabledSubTitle(props){
     return <h3 className={css["disabled"]}>{props.children}</h3>
 }

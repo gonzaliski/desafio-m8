@@ -31,12 +31,12 @@ export function EmailForm() {
         console.log(e.email);
         const res = await processEmail(e.email)
       if(res!=null){
-        console.log(res);
-        
+        console.log("existe",res);
         let data = processUserData(res)
         setUserData(data)
         navigate(`/password`, { replace: true });
-    }else{
+      }else{
+      console.log(" no existe",res);
         setUserData({email:e.email})
         navigate(`/myData`, { replace: true });
       }

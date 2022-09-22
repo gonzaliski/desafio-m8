@@ -12,8 +12,8 @@ export const CardContainer = styled.div`
             border-radius:4px;
         }
         .card-container.found{
-            box-shadow:0px 20px 25px -10px var(--found-color);
-            border-color:var(--found-color);
+            box-shadow:0px 20px 25px -10px var(--success-color);
+            border-color:var(--success-color);
         }
         .pet-img{
             width:100%;
@@ -26,31 +26,16 @@ export const CardContainer = styled.div`
             justify-content: space-between;
             align-items: center;
           }
-          .text-container.no-report{
-            display:flex;
-            justify-content:space-between;
-          }
 
           .edit-button{
             width:20px;
             height:20px;
             cursor:pointer;
           }
-          
-          .found-title{
-            display:none;
-          }
-          .found-title.found{
-            display:inline;
-            color:var(--found-color);
-          }
+
           .delete-pet__link{
-            display:none;
-          }
-          .delete-pet__link.found{
-            margin:10px;
-            display:inline;
             text-decoration: underline;
             cursor:pointer;
           }
+
 `

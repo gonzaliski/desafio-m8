@@ -1,17 +1,16 @@
 import { PetCard } from "../petCard/petCard";
-import React, { useState } from "react";
-import { useNearPets,useUserPets } from "../../hooks";
+import React, { useEffect, useState } from "react";
+import { useToken} from "../../hooks";
 import { DisabledSubTitle } from "../../ui/texts";
 import css from "./petList.css"
 import { ReportInfo } from "../../components/reportInfo/ReportInfo";
 
 export function PetList(props:petListProps) {
-  const nearPets = useNearPets()
+  const {pets} = props
+  const [token,setToken] = useToken()
   const [showReportInfo,setShowReportInfo] = useState(false)
   const [petToReport,setPetToReport] = useState(null)
-  const userPets = useUserPets()
-    let reportedPets = nearPets
-  if(props.from == "user") reportedPets=userPets
+  
 
   const handleClick= (data)=>{
     setPetToReport(data)
@@ -20,18 +19,21 @@ export function PetList(props:petListProps) {
   const dismount=()=>{
     setShowReportInfo(false)
   }
+
+
   return showReportInfo ? 
     (<ReportInfo onClose={dismount} pet={petToReport}/>)
     :
     (
     <div className={css["container"]}>
-      {reportedPets.length > 0 ? (
-        reportedPets.map((pet) => (
+      {(pets.length > 0) ? (
+        pets.map((pet) => (
           <PetCard
             id={pet.id}
             key={pet.id}
             source={pet.imageURL}
             name={pet.name}
+            found={pet.found}
             locationName={pet.locationName}
             onReportInfo={handleClick}
           />

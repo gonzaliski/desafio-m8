@@ -1,46 +1,61 @@
-import React, { Suspense, useEffect, useState } from "react"
-import { MainButton } from "../../ui/buttons"
+import React, { Suspense, useEffect, useState } from "react";
+import { MainButton } from "../../ui/buttons";
 import { LargeTitle, ThinText } from "../../ui/texts";
-import css from "./nearPets.css"
-import { useNearPets, useUserLocation } from "../../hooks";
+import css from "./nearPets.css";
+import { useUserLocation } from "../../hooks";
 import { PetList } from "../../components/petsList/PetsList";
 import { Loading } from "../../components/loading/Loading";
 import { useParams } from "react-router-dom";
-export function NearPets(){
-    const params = useParams()
-    const petsNearUser = useNearPets()
-    const [ubication, setUbication] = useUserLocation()
-    const handleClick = async()=>{
-        navigator.geolocation.getCurrentPosition((pos)=>{
-            setUbication({
-                lat:pos.coords.latitude,
-                lng:pos.coords.longitude
-            })
-        })
-       
-        // navigate("/petsNear", { replace: true });
-    } 
+import { nearPets } from "../../lib/api";
+export function NearPets() {
+  const params = useParams();
+  const [petsNearUser, setPetsNearUser] = useState([] as petData[]);
+  const [ubication, setUbication] = useUserLocation();
+  const handleClick = async () => {
+    navigator.geolocation.getCurrentPosition((pos) => {
+      setUbication({
+        lat: pos.coords.latitude,
+        lng: pos.coords.longitude,
+      });
+    });
+    fetchPets()
+    // navigate("/petsNear", { replace: true });
+  };
+  async function fetchPets() {
+    const petsNearRes = await nearPets(ubication);
+    const petsNear = petsNearRes.filter((p)=>!p.found)
+    setPetsNearUser(petsNear)
+  }
+  useEffect(() => {
+      console.log("pets near", petsNearUser);
+    if (ubication.lat && ubication.lng) {
+      console.log(ubication);
 
+      fetchPets();
+    }
+  }, [params,ubication]);
 
-    return (petsNearUser) ?
-    (
-    <div  className={css["pets-container"]}>
-        <Suspense fallback={<Loading/>}>
-
+  return (petsNearUser.length > 0) ? (
+    <div className={css["pets-container"]}>
+      <Suspense fallback={<Loading />}>
         <LargeTitle>Mascotas perdidas cerca tuyo</LargeTitle>
-        <PetList caseNotFound={"No hay mascotas cera de tu ubicación"}/>
-        </Suspense>
-        </div>
-        )
-        :
-        (<div className={css["container"]}>
-            <div className={css["content"]}>
-            <LargeTitle>Mascotas perdidas cerca tuyo</LargeTitle>
-            <ThinText>Para ver las mascotas reportadas cerca tuyo necesitamos permiso para conocer tu ubicación.</ThinText>
-            <MainButton onClick={handleClick}>Dar mi ubicación</MainButton>
-            </div>
-        </div>)
-    
+        <PetList
+          from="near"
+          caseNotFound={"No hay mascotas cera de tu ubicación"}
+          pets={petsNearUser}
+        />
+      </Suspense>
+    </div>
+  ) : (
+    <div className={css["container"]}>
+      <div className={css["content"]}>
+        <LargeTitle>Mascotas perdidas cerca tuyo</LargeTitle>
+        <ThinText>
+          Para ver las mascotas reportadas cerca tuyo necesitamos permiso para
+          conocer tu ubicación.
+        </ThinText>
+        <MainButton onClick={handleClick}>Dar mi ubicación</MainButton>
+      </div>
+    </div>
+  );
 }
-
-

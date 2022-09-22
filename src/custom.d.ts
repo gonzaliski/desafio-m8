@@ -51,8 +51,9 @@ type prevPathState = {
 }
 
 type petListProps = {
-    from?: "user" | "all"
+    from?: string
     caseNotFound:string
+    pets:petData[]
 }
 
 type inputProps = {

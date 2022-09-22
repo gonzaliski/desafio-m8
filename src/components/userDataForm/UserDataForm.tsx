@@ -82,10 +82,10 @@ export function UserDataForm() {
         
     }
     useEffect(()=>{
-      if(!token){
+      if(!userData.email){
         navigate("/",{replace:true})
       }
-    },[token])
+    },[userData.email])
 
   return submited ? 
     token ?

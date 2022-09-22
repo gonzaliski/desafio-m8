@@ -1,6 +1,14 @@
-import { nearPetsSelector, reportedPetsState, tokenState, userDataState, userLocationState, userPetsSelector } from "../atoms";
-import {useEffect} from "react"
-import { useSetRecoilState, useRecoilValue, useRecoilState } from "recoil"
+import { reportedPetsState, showPetOptionState, tokenState, userDataState, userLocationState, userPetsSelector, useShowPetsSelector } from "../atoms";
+import { useRecoilValue, useRecoilState } from "recoil"
+
+export const useUserData = ()=>useRecoilState(userDataState)
+export const useToken = ()=>useRecoilState(tokenState)
+export const useUserLocation = ()=>useRecoilState(userLocationState)
+export const useReportedPets = ()=>useRecoilState(reportedPetsState)
+export const useUserPets = ()=>useRecoilValue(userPetsSelector)
+export const usePets = ()=>useRecoilValue(useShowPetsSelector)
+export const useShowOption = ()=>useRecoilState(showPetOptionState)
+
 
 export function processUserData(data) {
    let result:userData = {}
@@ -18,9 +26,3 @@ export function processUserData(data) {
 
 
 
-export const useUserData = ()=>useRecoilState(userDataState)
-export const useToken = ()=>useRecoilState(tokenState)
-export const useNearPets = ()=>useRecoilValue(nearPetsSelector)
-export const useUserLocation = ()=>useRecoilState(userLocationState)
-export const useReportedPets = ()=>useRecoilState(reportedPetsState)
-export const useUserPets = ()=>useRecoilValue(userPetsSelector)

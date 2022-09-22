@@ -11,6 +11,10 @@
     display: block;
 }
 
+.success{
+    color:var(--success-color);
+}
+
 .underline{
     text-decoration:underline;
     color:blue;
