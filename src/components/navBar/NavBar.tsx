@@ -34,6 +34,7 @@ export function NavBar() {
 
   const logOut = ()=>{
     handleClick()
+    setUserInfoClicked(!userInfoClicked)
     setUserData({})
     setToken("")
     navigate("/",{replace:true})
