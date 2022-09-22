@@ -17,11 +17,13 @@ export function NearPets() {
         lat: pos.coords.latitude,
         lng: pos.coords.longitude,
       });
+      fetchPets() 
     });
-    fetchPets()
     // navigate("/petsNear", { replace: true });
-  };
+  }
   async function fetchPets() {
+    console.log("aa");
+    
     const petsNearRes = await nearPets(ubication);
     const petsNear = petsNearRes.filter((p)=>!p.found)
     setPetsNearUser(petsNear)
