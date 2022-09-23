@@ -17,7 +17,6 @@ export function NearPets() {
         lat: pos.coords.latitude,
         lng: pos.coords.longitude,
       });
-      fetchPets() 
     });
     // navigate("/petsNear", { replace: true });
   }
@@ -31,11 +30,11 @@ export function NearPets() {
   useEffect(() => {
       console.log("pets near", petsNearUser);
     if (ubication.lat && ubication.lng) {
-      console.log(ubication);
+      console.log(ubication.lat, ubication.lng);
 
       fetchPets();
     }
-  }, [params,ubication]);
+  }, [ubication]);
 
   return (petsNearUser.length > 0) ? (
     <div className={css["pets-container"]}>

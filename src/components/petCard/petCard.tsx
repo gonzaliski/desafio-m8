@@ -10,7 +10,6 @@ import { deletePet } from "../../lib/api";
 
 export function PetCard(props){
        const userPets = useUserPets()
-      
       const navigate = useNavigate()
       function isUserPet(id){
         const res = userPets.find((p)=>p.id==id)
