@@ -22,18 +22,14 @@ export function NearPets() {
   }
   async function fetchPets() {
     console.log("aa");
-    
+    if (ubication.lat && ubication.lng) {
     const petsNearRes = await nearPets(ubication);
     const petsNear = petsNearRes.filter((p)=>!p.found)
     setPetsNearUser(petsNear)
+    }
   }
   useEffect(() => {
-      console.log("pets near", petsNearUser);
-    if (ubication.lat && ubication.lng) {
-      console.log(ubication.lat, ubication.lng);
-
       fetchPets();
-    }
   }, [ubication]);
 
   return (petsNearUser.length > 0) ? (
