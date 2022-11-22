@@ -13,12 +13,14 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 const schema = object({
   name: string().required("Ingrese su nombre"),
-  phoneNumber: string().matches(/[0-9]{7}/,"Debe ingresar un numero valido").required("Se necesita un telefono de contacto"),
+  phoneNumber: string()
+    .matches(/[0-9]{7}/, "Debe ingresar un numero valido")
+    .required("Se necesita un telefono de contacto"),
   information: string().required("Por favor, indique alguna referencia"),
 });
 
-export function ReportInfo(props) {
-  const {pet} = props
+function ReportInfo(props) {
+  const { pet } = props;
   const {
     register,
     handleSubmit,
@@ -31,22 +33,21 @@ export function ReportInfo(props) {
   const handleClose = () => {
     props.onClose();
   };
-  
-  const onSubmit = async(data) => {
+
+  const onSubmit = async (data) => {
     console.log(data);
     const formattedData = {
-      lastSeenLocation:data.information,
-    phoneNumber:data.phoneNumber,
-    reporterName:data.name,
-    petName:pet.name
-    }
-    const res = await reportInfo(formattedData,pet.id)
+      lastSeenLocation: data.information,
+      phoneNumber: data.phoneNumber,
+      reporterName: data.name,
+      petName: pet.name,
+    };
+    const res = await reportInfo(formattedData, pet.id);
     if (res) {
-      alert("Se ha enviado el reporte")
-      handleClose()}
+      alert("Se ha enviado el reporte");
+      handleClose();
+    }
   };
-
- 
 
   return (
     <div className={css["container"]}>
@@ -88,3 +89,4 @@ export function ReportInfo(props) {
     </div>
   );
 }
+export { ReportInfo as default };

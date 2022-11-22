@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
-import { PasswordForm } from "../../components/passwordForm/PasswordForm";
-
+import React, { lazy } from "react";
+const PasswordForm = lazy(
+  () => import("../../components/passwordForm/PasswordForm")
+);
 export function Password() {
   return (
     <div>
-       <PasswordForm/>
+      <PasswordForm />
     </div>
   );
 }

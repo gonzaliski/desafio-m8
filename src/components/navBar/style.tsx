@@ -20,7 +20,6 @@ export const NavContainer = styled.nav`
       gap: 10px;
     }
   }
-
   .line {
     background-color: black;
     height: 5px;
@@ -50,7 +49,7 @@ export const NavContainer = styled.nav`
     .nav-menu {
       flex-direction: row;
       position: static;
-      left:0;
+      left: 0;
       width: auto;
       height: 100%;
       background-color: transparent;
@@ -74,19 +73,18 @@ export const NavContainer = styled.nav`
       z-index: -1;
       align-items: center;
     }
- 
   }
   .nav-menu.active {
     position: absolute;
     top: 70px;
-    padding: 5% 0 ;
+    padding: 5% 0;
     left: 0;
     z-index: 9;
   }
   @media (min-width: 768px) {
     .nav-menu.active {
-    position: initial;
-  }
+      position: initial;
+    }
   }
   .nav-link {
     text-decoration: none;
@@ -122,27 +120,25 @@ export const NavContainer = styled.nav`
     cursor: pointer;
   }
   .log-out.disabled {
-    display:none;
+    display: none;
   }
 
   .user-info__container.menu.active {
     position: absolute;
     top: 0;
-    height:175px;
-    padding-bottom:20px;
-    gap:5px;
+    height: 175px;
+    padding-bottom: 20px;
+    gap: 5px;
     z-index: -1;
-    justify-content:flex-end;
+    justify-content: flex-end;
   }
 
   .nav-link.user:active {
     color: white;
   }
-  @media(min-width:768px){
-      .hamburger-container{
-        display:none;         
+  @media (min-width: 768px) {
+    .hamburger-container {
+      display: none;
     }
-
-}
-
+  }
 `;

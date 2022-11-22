@@ -64,7 +64,7 @@ function MapboxSeach(props: MapBoxSearchProps) {
 
   useEffect(() => {
     if (props.defaultValue) {
-      setQuery(props.defaultValue)
+      setQuery(props.defaultValue);
       search();
     }
   }, [props.defaultValue]);
@@ -106,4 +106,4 @@ function MapboxSeach(props: MapBoxSearchProps) {
   );
 }
 
-export { MapboxSeach };
+export { MapboxSeach as default };

@@ -1,88 +1,79 @@
-import React, { useEffect, useState } from "react";
-import { BorderButton, MainButton, SecondaryButton } from "../../ui/buttons";
-import { ReportContainer } from "../reportPetForm/style";
-import { MyDropzone } from "../dropzone/MyDropzone";
+import React, { lazy, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { FormInput } from "../formInput/FormInput";
-import { MapboxSeach } from "../mapbox/Mapbox";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useToken, useUserPets } from "../../hooks";
 import { deletePet, reportFound, updatePet } from "../../lib/api";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { BorderButton, MainButton, SecondaryButton } from "../../ui/buttons";
 import { LargeTitle, ThinText, UnderlineText } from "../../ui/texts";
+import { FormInput } from "../formInput/FormInput";
+import { ReportContainer } from "../reportPetForm/style";
 
+const MyDropzone = lazy(() => import("../dropzone/MyDropzone"));
+const MapboxSeach = lazy(() => import("../mapbox/Mapbox"));
 
-
-export function EditPetForm() {
+function EditPetForm() {
   const pathLocation = useLocation();
-  const navigate = useNavigate()
-  const {prevPath} = pathLocation.state as prevPathState
-  const userPets = useUserPets() 
-  const [pet,setPet] = useState({} as petData)
-  const param = useParams()
+  const navigate = useNavigate();
+  const { prevPath } = pathLocation.state as prevPathState;
+  const userPets = useUserPets();
+  const [pet, setPet] = useState({} as petData);
+  const param = useParams();
   //despues cambiar por un hook que solamente me traiga el userData y no el setter (con token lo mismo)
-  const [token, setToken] = useToken();
+  const token = useToken();
   const [location, setLocation] = useState([]);
-  const {
-    handleSubmit,
-    setValue,
-    register
-  } = useForm();
+  const { handleSubmit, setValue, register } = useForm();
 
-  const getPet = ()=>{
-    return userPets.find((p)=>p.id==param.id)
-  }
+  const getPet = () => {
+    return userPets.find((p) => p.id == param.id);
+  };
 
   const onSubmit = async (data) => {
     const formattedData = {
-      imageURL:data.image,
+      imageURL: data.image,
       petName: data.name,
-      lng:location[0],
-      lat:location[1],
-      locationName:data.locationName,
-    }
-    const createReport = await updatePet(formattedData,token,pet.id)
-    console.log(createReport)
-    alert("Mascota actualizada")
-    backToPrev()
+      lng: location[0],
+      lat: location[1],
+      locationName: data.locationName,
+    };
+    const createReport = await updatePet(formattedData, token, pet.id);
+    console.log(createReport);
+    alert("Mascota actualizada");
+    backToPrev();
   };
 
   const uploadURL = (value) => {
-    setValue('image',value)
+    setValue("image", value);
   };
-  async function setFound(){
-    await reportFound(pet.id,token)
-    alert("Mascota actualizada")
-    backToPrev()
+  async function setFound() {
+    await reportFound(pet.id, token);
+    alert("Mascota actualizada");
+    backToPrev();
   }
   function handleMapboxChange(data) {
     // voy agregando data al state interno del form
-    setLocation(
-      data.coords
-    );
-    setValue('locationName',data.query)
+    setLocation(data.coords);
+    setValue("locationName", data.query);
   }
-  function backToPrev(){
-    navigate(`${prevPath}`,{replace:true})
+  function backToPrev() {
+    navigate(`${prevPath}`, { replace: true });
   }
-  async function deleteActualPet(){
-    await deletePet(pet.id, token)
-    alert("Mascota despublicada")
-    backToPrev()
+  async function deleteActualPet() {
+    await deletePet(pet.id, token);
+    alert("Mascota despublicada");
+    backToPrev();
   }
 
-  useEffect(()=>{
-    const foundPet =  getPet()
-    setPet(foundPet)
+  useEffect(() => {
+    const foundPet = getPet();
+    setPet(foundPet);
     console.log(foundPet);
-    
-    if(!foundPet){
-      backToPrev()
+
+    if (!foundPet) {
+      backToPrev();
     }
-    
-  },[param])
+  }, [param]);
 
   return (
-
     <ReportContainer>
       <div className="container">
         <div className="content">
@@ -111,7 +102,12 @@ export function EditPetForm() {
               className="dropzone"
             ></MyDropzone>
             <div className="form-inputs">
-              <MapboxSeach onChange={handleMapboxChange} register={register} error={undefined} defaultValue={pet.locationName}/>
+              <MapboxSeach
+                onChange={handleMapboxChange}
+                register={register}
+                error={undefined}
+                defaultValue={pet.locationName}
+              />
             </div>
             <ThinText className="location-text">
               Buscá un punto de referencia para reportar a tu mascota. Puede ser
@@ -120,12 +116,20 @@ export function EditPetForm() {
 
             <MainButton>Guardar</MainButton>
           </form>
-            <SecondaryButton onClick={()=>setFound()}>Reportar como encontrado</SecondaryButton>
-            <BorderButton onClick={()=>backToPrev()}>Cancelar</BorderButton>
-            <UnderlineText onClick={()=>deleteActualPet()} className="unpublish">Despublicar</UnderlineText>
+          <SecondaryButton onClick={() => setFound()}>
+            Reportar como encontrado
+          </SecondaryButton>
+          <BorderButton onClick={() => backToPrev()}>Cancelar</BorderButton>
+          <UnderlineText
+            onClick={() => deleteActualPet()}
+            className="unpublish"
+          >
+            Despublicar
+          </UnderlineText>
         </div>
       </div>
     </ReportContainer>
-
   );
 }
+
+export { EditPetForm as default };

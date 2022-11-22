@@ -1,4 +1,5 @@
 const path = require("path");
+const CompressionPlugin = require("compression-webpack-plugin");
 const dev = process.env.NODE_ENV == "development";
 const liveServer = require("live-server");
 
@@ -11,7 +12,8 @@ if (dev) {
 
 module.exports = {
   mode: process.env.NODE_ENV,
-  devtool:false,
+  plugins: [new CompressionPlugin()],
+  devtool: false,
   watch: true,
   entry: "./src/index.tsx",
   module: {
@@ -54,7 +56,12 @@ module.exports = {
     extensions: [".tsx", ".js", ".ts"],
   },
   output: {
+    filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
+  },
+  optimization: {
+    splitChunks: {
+      chunks: "all",
+    },
   },
 };

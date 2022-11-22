@@ -1,6 +1,7 @@
-import React from "react"
-import { EditPetForm } from "../../components/ediPetForm/EditPetForm"
-
-export function EditPet(){
-    return <EditPetForm/>
+import React, { lazy } from "react";
+const EditPetForm = lazy(
+  () => import("../../components/ediPetForm/EditPetForm")
+);
+export function EditPet() {
+  return <EditPetForm />;
 }

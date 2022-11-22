@@ -1,13 +1,13 @@
-import { Layout } from "../components/layout/Layout";
-import { Home } from "../pages/home/Home";
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import { Layout } from "../components/layout/Layout";
 import { CheckEmail } from "../pages/checkEmail/checkEmail";
-import { Password } from "../pages/password/Password";
+import { EditPet } from "../pages/editPet/EditPet";
+import { Home } from "../pages/home/Home";
 import { MyData } from "../pages/myData/MyData";
 import { MyReports } from "../pages/myReportedPets/MyReports";
+import { Password } from "../pages/password/Password";
 import { ReportPet } from "../pages/reportPet/ReportPet";
-import { EditPet } from "../pages/editPet/EditPet";
 function AppRoutes() {
   return (
     <Routes>

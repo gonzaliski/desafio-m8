@@ -1,12 +1,12 @@
-import { ReportPetForm } from "../../components/reportPetForm/ReportPetForm"
-import React, { useState } from "react"
+import React, { lazy } from "react";
+const ReportPetForm = lazy(
+  () => import("../../components/reportPetForm/ReportPetForm")
+);
 
-export function ReportPet(){
- 
-    return (
-       <div>
-        <ReportPetForm/>
-       </div>
-    )
+export function ReportPet() {
+  return (
+    <div>
+      <ReportPetForm />
+    </div>
+  );
 }
-

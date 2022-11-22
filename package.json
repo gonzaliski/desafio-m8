@@ -11,6 +11,7 @@
     "@hookform/resolvers": "^2.9.7",
     "@types/node": "^18.7.13",
     "@types/react": "^18.0.17",
+    "compression-webpack-plugin": "^10.0.0",
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",
     "file-loader": "^6.2.0",
@@ -38,6 +39,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack",
     "build": "cross-env NODE_ENV=production webpack",
+    "postbuild": "cd /dist && gzip *.js && gzip *.css",
     "start": "live-server",
     "pretty": "prettier --write \"./**/*.{js,jsx,json}\""
   },
