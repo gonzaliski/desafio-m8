@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://desafio-m7.vercel.app";
+const API_BASE_URL = "https://petfinder-9v4v.onrender.com";
 import { map } from "lodash";
 
 export async function getUser(email: string) {
