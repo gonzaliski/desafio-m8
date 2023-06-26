@@ -1,6 +1,6 @@
-# Desafio-m8 Pet finder
+# Pet finder
 
-REACT + TYPESCRIPT + POSTGRES
+REACT + TYPESCRIPT + EXPRESS + POSTGRES
 
 
 Link: https://desafio-m8-b7808.web.app
